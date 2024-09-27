@@ -111,6 +111,10 @@ class NotionHelper:
             # 如果子块有子块，递归调用函数
             if "has_children" in child and child["has_children"]:
                 self.search_database(child["id"])
+            if child["type"] == "image" and child.get("image") and child["image"].get("external") and child["image"]["external"].get("url"):
+                self.image_dict["url"] = child["image"]["external"]["url"]
+                self.image_dict["id"] = child["id"]
+
 
     def update_book_database(self):
         """更新数据库"""
