@@ -304,10 +304,10 @@ class NotionHelper:
         )
 
     @retry(stop_max_attempt_number=3, wait_fixed=5000)
-    def create_page(self, parent, properties, icon):
+    def create_page(self, parent, properties, icon=None):
         if icon and icon.get("external", {}).get("url") is None:
-        # 如果 icon 存在但 external.url 为 None，设置为默认值或者跳过这个字段
-        icon = None  # 或者使用一个默认的 icon URL
+            # 如果 icon 存在但 external.url 为 None，设置为默认值或者跳过这个字段
+            icon = None  # 或者使用一个默认的 icon URL
         return self.client.pages.create(parent=parent, properties=properties, icon=icon)
 
     @retry(stop_max_attempt_number=3, wait_fixed=5000)
